@@ -29,7 +29,7 @@ RUN apk add --no-cache \
 RUN addgroup -g 1000 caddy && \
     adduser -D -s /bin/sh -u 1000 -G caddy caddy
 
-COPY --from=builder /caddy /usr/bin/caddy
+COPY --from=builder /go/caddy /usr/bin/caddy
 RUN chmod +x /usr/bin/caddy
 
 RUN mkdir -p /etc/caddy /var/lib/caddy /var/log/caddy /config && \
