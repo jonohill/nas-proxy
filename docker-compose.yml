@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  caddy:
+    build: .
+    container_name: caddy-nas-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "2019:2019"  # Caddy admin API
+    volumes:
+      - ./Caddyfile:/config/Caddyfile:ro
+      - caddy_data:/var/lib/caddy
+      - caddy_config:/etc/caddy
+    environment:
+      # Add any environment variables needed for Tailscale
+      - TS_AUTHKEY=${TS_AUTHKEY:-}
+    networks:
+      - caddy-network
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  caddy-network:
+    driver: bridge

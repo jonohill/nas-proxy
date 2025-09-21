@@ -1,0 +1,31 @@
+# Example Caddyfile demonstrating Tailscale and ForwardProxy plugins
+# Replace with your actual configuration
+
+# Basic HTTP server
+:80 {
+    respond "Hello from Caddy with Tailscale and ForwardProxy!"
+}
+
+# Example Tailscale configuration
+# Uncomment and modify as needed
+# your-tailscale-hostname.your-tailnet.ts.net {
+#     tailscale_auth
+#     respond "This is protected by Tailscale!"
+# }
+
+# Example ForwardProxy configuration
+# Uncomment and modify as needed
+# :8080 {
+#     forwardproxy {
+#         basicauth user password
+#         hide_ip
+#         hide_via
+#         probe_resistance
+#     }
+# }
+
+# HTTPS example with automatic TLS
+# your-domain.com {
+#     tls internal
+#     respond "HTTPS with automatic TLS!"
+# }
