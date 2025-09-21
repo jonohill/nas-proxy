@@ -1,7 +1,6 @@
-FROM alpine:3.18 AS builder
+FROM golang:1.25.1-alpine AS builder
 
 RUN apk add --no-cache \
-    go \
     git \
     ca-certificates \
     tzdata
@@ -20,7 +19,7 @@ RUN xcaddy build \
     --with github.com/caddyserver/forwardproxy
 
 
-FROM alpine:3.18
+FROM alpine:3.19
 
 RUN apk add --no-cache \
     ca-certificates \
