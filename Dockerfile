@@ -32,6 +32,8 @@ RUN addgroup -g 1000 caddy && \
 COPY --from=builder /go/caddy /usr/bin/caddy
 RUN chmod +x /usr/bin/caddy
 
+COPY Caddyfile /etc/caddy/Caddyfile
+
 RUN mkdir -p /etc/caddy /var/lib/caddy /var/log/caddy /config && \
     chown -R caddy:caddy /etc/caddy /var/lib/caddy /var/log/caddy /config
 
@@ -44,4 +46,4 @@ WORKDIR /etc/caddy
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD caddy version || exit 1
 
-CMD ["caddy", "run", "--config", "/config/Caddyfile", "--adapter", "caddyfile"]
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
