@@ -1,3 +1,9 @@
+{
+    tailscale {
+        state_dir /config
+    }
+}
+
 :443 {
 	bind tailscale/{$TS_HOST}
 	tls {
