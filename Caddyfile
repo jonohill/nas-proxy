@@ -1,9 +1,19 @@
-https://{$HOST}.{$TAILNET}.ts.net {
-    bind {$HOST}
+:443 {
+	bind tailscale/{$TS_HOST}
+	tls {
+		get_certificate tailscale
+	}
 
-    forwardproxy {
-        hide_ip
-        hide_via
-        disable_insecure_upstreams_check
-    }
+	handle /proxy.pac {
+		header Access-Control-Allow-Origin "*"
+		header Cache-Control "max-age=3600"
+		header Content-Type "application/x-ns-proxy-autoconfig"
+		respond "function FindProxyForURL(url, host) { return 'HTTPS {$TS_HOST}.{$TS_TAILNET}:443; DIRECT'; }" 200
+	}
+
+	forward_proxy {
+		hide_ip
+		hide_via
+		disable_insecure_upstreams_check
+	}
 }
