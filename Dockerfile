@@ -19,7 +19,7 @@ RUN xcaddy build \
     --with github.com/caddyserver/forwardproxy
 
 
-FROM alpine:3.23
+FROM alpine:3.24
 
 RUN apk add --no-cache \
     ca-certificates \
